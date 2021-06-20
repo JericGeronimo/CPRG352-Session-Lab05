@@ -29,10 +29,16 @@ public class LoginServlet extends HttpServlet {
             session.invalidate();
             // Displays a message to indicate successful log out
             request.setAttribute("message", "You have successfully logged out");
+            // this will display the requested JSP as a view
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        } else if (username != null) {
+            // send the user to the home page
+            response.sendRedirect("home");
+        } else {
+            // this will display the requested JSP as a view
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
 
-        // this will display the requested JSP as a view
-        getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
     @Override
