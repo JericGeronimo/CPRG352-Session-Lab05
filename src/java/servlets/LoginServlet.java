@@ -19,6 +19,18 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // create session object
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("user_name");
+        // Logout
+        if (request.getParameter("logout") != null) {
+            // invalidates session then 
+            // unbinds any objects attached
+            session.invalidate();
+            // Displays a message to indicate successful log out
+            request.setAttribute("message", "You have successfully logged out");
+        }
+
         // this will display the requested JSP as a view
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
